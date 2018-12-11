@@ -2,8 +2,12 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
+
+// allow cros-origin requests
+app.use(cors())
 
 // connection string to the mongo db
 mongoose.connect('mongodb://your-connection-string',
@@ -20,10 +24,10 @@ app.use('/graphiql', graphqlHTTP({
 }));
 
 app.get('/', function (req, res) {
-    res.send('Hello World')
+    res.send('Server working properly')
 });
 
-app.listen(4100);
+app.listen(4000);
 
 // https://youtu.be/ed8SzALpx1Q?t=5385 lesson 16 graphql
 // nodemon app -> command line for running instance of node 
